@@ -263,6 +263,7 @@ dd {
 
 html {
     height: 100%;
+    width: 100%
 }
 
 body {
@@ -272,10 +273,13 @@ body {
     font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
     font-size: 16px;
     height: 100%;
-    background: #fff;
+    background: rgb(243, 109, 86)
 }
 
 div {
     box-sizing: border-box
 }
+
+
+
 </style>

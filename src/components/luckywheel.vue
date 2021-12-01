@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="lucky-wheel">
-      <div class="lucky-title"></div>
+      <!-- <div class="lucky-title"></div> -->
       <div class="wheel-main">
         <div class="wheel-pointer" @click="beginRotate()"></div>
         <div class="wheel-bg" :style="rotateStyle">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="main">
+    <!-- <div class="main">
       <div class="main-bg"></div>
       <div class="bg-p"></div>
       <div class="content">
@@ -35,12 +35,12 @@
           <p>3.所中金豆或积分到【我的账户】中查询。累计达到100金豆及以上，可以兑换相应奖品</p>
         </div>
       </div>
-    </div>
-    <div class="toast" v-show="prize">
+    </div> -->
+    <div class="toast" v-if="prize">
       <div class="toast-container">
         <img :src="toastIcon" class="toast-picture" />
         <div class="close" @click="closeToast()"></div>
-        <div class="toast-title">{{toastTitle}}</div>
+        <div class="toast-title">恭喜您，获得<p class="prize-name-desc">🌟{{prize.name}}🌟</p></div>
         <div class="toast-btn">
           <div class="toast-cancel" @click="closeToast">关闭</div>
         </div>
@@ -82,6 +82,19 @@ export default {
 
     // 获取奖品列表
     this.initPrizeList();
+
+    const availableKey = ['1','2','3','4','5', '6', '7']
+    document.onkeydown=(e)=> {
+      if(availableKey.indexOf(e.key) === -1) return false
+      if(e.key!=='1'&&e.key!=='2') {
+        // 随机获取下标
+        let randomNum = parseInt(Math.random()*(7-2+1)+2,10);
+        this.index = randomNum
+      } else {
+        this.index = Number(e.key) -1
+      }
+      this.rotating()
+    }
   },
   computed: {
     rotateStyle () {
@@ -92,10 +105,11 @@ export default {
             transform: rotate(${this.rotateAngle}deg);`
     },
     toastTitle () {
-      return this.prize && this.prize.isPrize === 1
-        ? "恭喜您，获得" +
-            this.prize.name
-        : "未中奖";
+      // return this.prize && this.prize.isPrize === 1
+      //   ? "恭喜您，获得" +
+      //       this.prize.name
+      //   : "未中奖";
+      return "恭喜您，获得" + this.prize.name
     },
     toastIcon() {
       return this.prize && this.prize.isPrize === 1
@@ -120,7 +134,7 @@ export default {
       const average = CIRCLE_ANGLE / l
 
       const half = average / 2
-
+      
       // 循环计算给每个奖项添加style属性
       list.forEach((item, i) => {
 
@@ -129,7 +143,7 @@ export default {
         // 增加 style
         item.style = `-webkit-transform: rotate(${angle}deg);
                       transform: rotate(${angle}deg);`
-
+        
         // 记录每个奖项的角度范围
         angleList.push((i * average) + half )
       })
@@ -139,6 +153,7 @@ export default {
       return list
     },
     beginRotate() {
+      return
       // 添加次数校验
       
       if(this.count === 0) return
@@ -190,7 +205,7 @@ export default {
 
       this.prize = prizeList[this.index]
 
-      console.log(this.prize, this.index)
+      // console.log(this.prize, this.index)
     },
     //关闭弹窗
     closeToast() {
@@ -199,28 +214,29 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style >
 .container {
   width: 100%;
 }
 .lucky-wheel {
   width: 100%;
-  background: rgb(252, 207, 133) url("../assets/img/color_pillar.png") no-repeat
+  /* background: rgb(252, 207, 133) url("../assets/img/color_pillar.png") no-repeat
     center bottom;
-  background-size: 100%;
+  background-size: 100%; */
   padding-top: 20px;
 }
 .lucky-title {
   width: 100%;
-  height: 8.125rem;
+  /* height: 8.125rem; */
+  height: 20rem;
   background: url("../assets/img/lucky_title.png") no-repeat center top;
   background-size: 100%;
 }
 .wheel-main {
   margin: 0 auto;
   position: relative;
-  width: 295px;
-  height: 295px;
+  width: 595px;
+  height: 595px;
 }
 .wheel-bg {
   position: absolute;
@@ -255,32 +271,32 @@ export default {
 .prize-list .prize-item {
   position: absolute;
   width: 95px;
-  height: 150px;
-  top: 0;
+  height: 250px;
+  top: 50px;
   left: 50%;
   margin-left: -47.5px;
   transform-origin: 50% 100%;
 }
 
 .prize-pic img {
-  width: 4.0625rem;
-  height: 2.5rem;
+  width: 6.0625rem;
+  height: 3.5rem;
   margin-top: 1.5625rem;
 }
 .prize-count {
   font-size: 0.875rem;
 }
 .prize-type {
-  font-size: 0.75rem;
+  font-size: 1.5rem;
 }
-.main {
+/* .main {
   position: relative;
   width: 100%;
   min-height: 14.25rem;
   background: rgb(243, 109, 86);
   padding-bottom: 1.6875rem;
-}
-.main-bg {
+} */
+/* .main-bg {
   width: 100%;
   height: 6.5625rem;
   position: absolute;
@@ -293,8 +309,8 @@ export default {
   width: 100%;
   height: 2.95rem;
   background: rgb(252, 207, 133);
-}
-.content {
+} */
+/* .content {
   position: absolute;
   top: 0.175rem;
   left: 0;
@@ -313,8 +329,8 @@ export default {
   margin: 2.5rem auto 0;
   width: 17.5rem;
   border: 1px solid #fbc27f;
-}
-.tip-title {
+} */
+/* .tip-title {
   position: absolute;
   top: -1rem;
   left: 50%;
@@ -329,7 +345,7 @@ export default {
   font-size: 0.875rem;
   color: #fff8c5;
   line-height: 1.5;
-}
+} */
 .toast-mask {
   position: fixed;
   top: 0;
@@ -419,6 +435,10 @@ export default {
   height: 2rem;
   background: url("../assets/img/close_store.png") no-repeat center top;
   background-size: 100%;
+}
+.prize-name-desc {
+  margin-top: 10px;
+  font-size: 2rem;
 }
 </style>
 

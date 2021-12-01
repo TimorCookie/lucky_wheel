@@ -2,7 +2,7 @@
   "name": "lucky_wheel",
   "version": "1.0.0",
   "description": " a vue.js lucky_wheel support pc and mobile",
-  "author": "liuhaihong <liuhaihong@eastcom.com>",
+  "author": "timokie <timokie@126.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

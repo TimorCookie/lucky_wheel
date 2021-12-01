@@ -1,11 +1,12 @@
 export const prizeList = [
   {
-    icon: require("../assets/img/bean_500.png"), // 奖品图片
+
+    icon: require("../assets/img/bean_five.png"),
     name: "奖品1", // 奖品名称
     isPrize: 1 // 该奖项是否为奖品
   },
   {
-    icon: require("../assets/img/bean_five.png"),
+    icon: require("../assets/img/bean_500.png"), // 奖品图片
     name: "奖品2",
     isPrize: 1
   },
@@ -25,14 +26,14 @@ export const prizeList = [
     isPrize: 1
   },
   {
-    icon: require("../assets/img/bean_500.png"),
+    icon: require("../assets/img/bean_five.png"),
     name: "奖品6",
     isPrize: 1
   },
   {
-    icon: require("../assets/img/give_up.png"),
+    icon: require("../assets/img/point_ten.png"),
     name: "奖品7",
-    isPrize: 0
+    isPrize: 1
   },
   {
     icon: require("../assets/img/bean_500.png"),
